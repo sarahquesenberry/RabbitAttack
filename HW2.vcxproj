@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClCompile Include="CMDProcessor.cpp" />
     <ClCompile Include="FileProcessor.cpp" />
+    <ClCompile Include="fork2.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="Log.cpp" />
