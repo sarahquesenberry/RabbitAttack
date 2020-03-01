@@ -1,0 +1,318 @@
+Begin
+Sun Mar  1 20:07:09 2020
+
+Loaded log file: logfile.txt
+Sun Mar  1 20:07:09 2020
+
+Loaded rabbit file: rabbit
+Sun Mar  1 20:07:09 2020
+
+Loaded knight file: knight
+Sun Mar  1 20:07:09 2020
+
+Knights:
+Sun Mar  1 20:07:09 2020
+
+Sir Lancelot
+Sun Mar  1 20:07:09 2020
+
+Sir Robin
+Sun Mar  1 20:07:09 2020
+
+Sir Bedivere
+Sun Mar  1 20:07:09 2020
+
+Sir Bors
+Sun Mar  1 20:07:09 2020
+
+Sir Not Appearing In This Movie
+Sun Mar  1 20:07:09 2020
+
+Let the game begin!
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Bors; Attack Type: Throat Attack; Damage: 35
+Sun Mar  1 20:07:09 2020
+
+Sir Bors has been slain by Throat Attack!
+Sun Mar  1 20:07:09 2020
+
+Sir Lancelot attempts to attack the rabbit but misses!
+Sun Mar  1 20:07:09 2020
+
+Sir Robin -- Target: Rabbit; Damage: 3
+Sun Mar  1 20:07:09 2020
+
+Sir Bedivere -- Target: Rabbit; Damage: 0
+Sun Mar  1 20:07:09 2020
+
+Sir Not Appearing In This Movie attempts to attack the rabbit but misses!
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Robin; Attack Type: Bite; Damage: 3
+Sun Mar  1 20:07:09 2020
+
+Sir Robin runs away from Bite. Coward!
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 7
+Sun Mar  1 20:07:09 2020
+
+Sir Not Appearing In This Movie attempts to attack the rabbit but misses!
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Lancelot; Attack Type: Bite; Damage: 6
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Bedivere; Attack Type: Bite; Damage: 4
+Sun Mar  1 20:07:09 2020
+
+Sir Bedivere -- Target: Rabbit; Damage: 3
+Sun Mar  1 20:07:09 2020
+
+Sir Not Appearing In This Movie -- Target: Rabbit; Damage: 7
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 3
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Bedivere; Attack Type: Bite; Damage: 2
+Sun Mar  1 20:07:09 2020
+
+Sir Not Appearing In This Movie attempts to attack the rabbit but misses!
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Lancelot; Attack Type: Bite; Damage: 5
+Sun Mar  1 20:07:09 2020
+
+Sir Lancelot -- Target: Rabbit; Damage: 8
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Bedivere; Attack Type: Bite; Damage: 5
+Sun Mar  1 20:07:09 2020
+
+Sir Bedivere runs away from Bite. Coward!
+Sun Mar  1 20:07:09 2020
+
+Sir Not Appearing In This Movie -- Target: Rabbit; Damage: 8
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Lancelot; Attack Type: Quick Attack; Damage: 3
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Quick Attack; Damage: 4
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Lancelot; Attack Type: Bite; Damage: 2
+Sun Mar  1 20:07:09 2020
+
+Sir Not Appearing In This Movie attempts to attack the rabbit but misses!
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Lancelot; Attack Type: Throat Attack; Damage: 34
+Sun Mar  1 20:07:09 2020
+
+Sir Lancelot has been slain by Throat Attack!
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Quick Attack; Damage: 4
+Sun Mar  1 20:07:09 2020
+
+Sir Not Appearing In This Movie -- Target: Rabbit; Damage: 9
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 5
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 4
+Sun Mar  1 20:07:09 2020
+
+Sir Not Appearing In This Movie attempts to attack the rabbit but misses!
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 3
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 5
+Sun Mar  1 20:07:09 2020
+
+Sir Not Appearing In This Movie -- Target: Rabbit; Damage: 8
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 4
+Sun Mar  1 20:07:09 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 4
+Sun Mar  1 20:07:09 2020
+
+Sir Not Appearing In This Movie -- Target: Rabbit; Damage: 5
+Sun Mar  1 20:07:09 2020
+
+The rabbit has been slain. The knights are victorious!
+Sun Mar  1 20:07:09 2020
+
+The game is over, thank you for playing
+Sun Mar  1 20:07:09 2020
+
+End
+Sun Mar  1 20:07:09 2020
+
+Begin
+Sun Mar  1 20:12:16 2020
+
+Loaded log file: logfile.txt
+Sun Mar  1 20:12:16 2020
+
+Loaded rabbit file: rabbit
+Sun Mar  1 20:12:16 2020
+
+Loaded knight file: knight
+Sun Mar  1 20:12:16 2020
+
+Knights:
+Sun Mar  1 20:12:16 2020
+
+Sir Lancelot
+Sun Mar  1 20:12:16 2020
+
+Sir Robin
+Sun Mar  1 20:12:16 2020
+
+Sir Bedivere
+Sun Mar  1 20:12:16 2020
+
+Sir Bors
+Sun Mar  1 20:12:16 2020
+
+Sir Not Appearing In This Movie
+Sun Mar  1 20:12:16 2020
+
+Let the game begin!
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Bors; Attack Type: Throat Attack; Damage: 35
+Sun Mar  1 20:12:16 2020
+
+Sir Bors has been slain by Throat Attack!
+Sun Mar  1 20:12:16 2020
+
+Sir Lancelot attempts to attack the rabbit but misses!
+Sun Mar  1 20:12:16 2020
+
+Sir Robin -- Target: Rabbit; Damage: 3
+Sun Mar  1 20:12:16 2020
+
+Sir Bedivere -- Target: Rabbit; Damage: 0
+Sun Mar  1 20:12:16 2020
+
+Sir Not Appearing In This Movie attempts to attack the rabbit but misses!
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Robin; Attack Type: Bite; Damage: 3
+Sun Mar  1 20:12:16 2020
+
+Sir Robin runs away from Bite. Coward!
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 7
+Sun Mar  1 20:12:16 2020
+
+Sir Not Appearing In This Movie attempts to attack the rabbit but misses!
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Lancelot; Attack Type: Bite; Damage: 6
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Bedivere; Attack Type: Bite; Damage: 4
+Sun Mar  1 20:12:16 2020
+
+Sir Bedivere -- Target: Rabbit; Damage: 3
+Sun Mar  1 20:12:16 2020
+
+Sir Not Appearing In This Movie -- Target: Rabbit; Damage: 7
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 3
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Bedivere; Attack Type: Bite; Damage: 2
+Sun Mar  1 20:12:16 2020
+
+Sir Not Appearing In This Movie attempts to attack the rabbit but misses!
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Lancelot; Attack Type: Bite; Damage: 5
+Sun Mar  1 20:12:16 2020
+
+Sir Lancelot -- Target: Rabbit; Damage: 8
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Bedivere; Attack Type: Bite; Damage: 5
+Sun Mar  1 20:12:16 2020
+
+Sir Bedivere runs away from Bite. Coward!
+Sun Mar  1 20:12:16 2020
+
+Sir Not Appearing In This Movie -- Target: Rabbit; Damage: 8
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Lancelot; Attack Type: Quick Attack; Damage: 3
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Quick Attack; Damage: 4
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Lancelot; Attack Type: Bite; Damage: 2
+Sun Mar  1 20:12:16 2020
+
+Sir Not Appearing In This Movie attempts to attack the rabbit but misses!
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Lancelot; Attack Type: Throat Attack; Damage: 34
+Sun Mar  1 20:12:16 2020
+
+Sir Lancelot has been slain by Throat Attack!
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Quick Attack; Damage: 4
+Sun Mar  1 20:12:16 2020
+
+Sir Not Appearing In This Movie -- Target: Rabbit; Damage: 9
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 5
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 4
+Sun Mar  1 20:12:16 2020
+
+Sir Not Appearing In This Movie attempts to attack the rabbit but misses!
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 3
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 5
+Sun Mar  1 20:12:16 2020
+
+Sir Not Appearing In This Movie -- Target: Rabbit; Damage: 8
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 4
+Sun Mar  1 20:12:16 2020
+
+Rabbit -- Target: Sir Not Appearing In This Movie; Attack Type: Bite; Damage: 4
+Sun Mar  1 20:12:16 2020
+
+Sir Not Appearing In This Movie -- Target: Rabbit; Damage: 5
+Sun Mar  1 20:12:16 2020
+
+The rabbit has been slain. The knights are victorious!
+Sun Mar  1 20:12:16 2020
+
+The game is over, thank you for playing
+Sun Mar  1 20:12:16 2020
+
+End
+Sun Mar  1 20:12:16 2020
+
