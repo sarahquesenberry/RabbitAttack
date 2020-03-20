@@ -49,7 +49,7 @@ int hw4::main(int argc, char* argv[]) {
 		return 0;
 	}
 	if (childLog == 0) {
-		logStatus = main().makeLog();
+		logStatus = hw4().makeLog();
 	}
 
 
@@ -100,7 +100,7 @@ int hw4::main(int argc, char* argv[]) {
 				return 0;
 			}
 			if (childKnight == 0) {
-				knightStatus = main().makeKnight(i);
+				knightStatus = hw4().makeKnight(i);
 			}
 		}
 
@@ -112,7 +112,7 @@ int hw4::main(int argc, char* argv[]) {
 			return 0;
 		}
 		if (childKnight == 0) {
-			knightStatus = main().makeKnight();
+			knightStatus = hw4().makeKnight();
 		}
 	}
 
@@ -134,7 +134,7 @@ int hw4::main(int argc, char* argv[]) {
 		return 0;
 	}
 	if (childRabbit == 0) {
-		rabbitStatus = main().makeRabbit();
+		rabbitStatus = hw4().makeRabbit();
 	}
 
 
@@ -152,7 +152,7 @@ int hw4::main(int argc, char* argv[]) {
 
 
 	// begin simulation
-	return main().playGame();
+	return hw4().playGame();
 	
 
 	return 0;
@@ -226,7 +226,7 @@ int hw4::playGame() {
 	//while (!victor) {
 
 	//}
-
+	cout << "Game is played" << endl;
 
 	return 0;
 }
