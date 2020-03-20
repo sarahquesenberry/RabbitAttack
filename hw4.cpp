@@ -12,6 +12,8 @@
 #include <iterator>
 #include <vector>
 #include <sstream>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 
 using namespace std;
