@@ -297,7 +297,7 @@ int hw4::playGame() {
 			// send message to knight
 			write(pipeToChild[1], (char*)&m, sizeof(message));
 		}
-		else if (attachChange <= (rabbit.getBite() + rabbit.getQuick())) {
+		else if (attackChance <= (rabbit.getBite() + rabbit.getQuick())) {
 			// rabbit chooses Quick Attack
 			target = 0;
 			for (Knight k : knights) {
