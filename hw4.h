@@ -41,6 +41,10 @@ private:
 	int knightStatus = 0;
 	int rabbitStatus = 0;
 
+	int pipeToChild[2];
+	int pipeFromChild[2];
+	int bytesRead;
+
 public:
 	int main(int argc, char* argv[]);
 
