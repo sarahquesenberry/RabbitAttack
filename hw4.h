@@ -1,36 +1,55 @@
-#pragma once
-#ifndef HW4
-#define HW4
+#ifndef MAIN
+#define MAIN
 
+#include <iostream>
 #include "Log.h"
-#include "Knight.h"
 #include "Rabbit.h"
+#include "Knight.h"
+#include "Game.h"
+#include <string>
 #include "CMDProcessor.cpp"
 #include "FileProcessor.cpp"
+#include <map>
+#include <iterator>
 #include <vector>
-#include <thread>
-#include <chrono>
-#include <iostream>
-#include <wait.h>
-#include <unistd.h>
+#include <sstream>
 
-using namespace std;
+class main {
+public:
+	map<char, string> arguments = CMDProcessor().Process(argc, argv);
+	string logFileName = "";
+	string rabbitFileName = "";
+	string knightFileName = "";
 
-class hw4{
-private:
-    vector<Knight> knights;
-    Rabbit rabbit;
-    Log log;
+	vector<string> rFileContents;
+	vector<string> kFileContents;
+
+	string trash;
+	stringstream ss;
+	vector<string> values;
+	int count;
+
+
+	Rabbit rabbit;
+
+	Knight knight;
+	vector<Knight> knights;
+
+	int logStatus = 0;
+	int knightStatus = 0;
+	int rabbitStatus = 0;
 
 public:
-    int LogProc();
-    int KnightProc();
-    int RabbitProc();
+	int main(int argc, char* argv[]);
 
-    int PlayGame();
+	int makeLog();
+	int makeKnight();
+	int makeKnight(int i);
+	int makeRabbit();
+	int playGame();
+
+
 
 };
-
-
 
 #endif

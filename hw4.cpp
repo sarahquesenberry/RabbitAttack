@@ -1,195 +1,227 @@
 #include "hw4.h"
+#include <iostream>
+#include "Log.h"
+#include "Rabbit.h"
+#include "Knight.h"
+#include "Game.h"
+#include <string>
+#include "CMDProcessor.cpp"
+#include "FileProcessor.cpp"
+#include <map>
+#include <iterator>
+#include <vector>
+#include <sstream>
 
 using namespace std;
 
-int main(int argc, char* argv[]){
-    cout << "I am main" << endl;
-    
-    
-    map<char, string> arguments = CMDProcessor().Process(argc, argv);
-    string logFileName = "";
-    string rabbitFileName = "";
-    string knightFileName = "";
-
-    vector<string> rFileContents;
-    vector<string> kFileContents;
-
-    string trash;
-    stringstream ss;
-    vector<string> values;
-    int count;
-
-    Rabbit rabbit;
-
-    Knight knight;
-    vector<Knight> knights;
-
-    
-
-    int childLog = fork();
-    int logStatus = 0;
-    if(childLog == -1){
-        cout << "An error has occured" << endl;
-        return 0;
-    }
-    if(childLog == 0){
-        // create Log proccess
-        logStatus = hw4().LogProc();
-    }
 
 
-    // Load rabbit file
-    try {
-        rabbitFileName = arguments.at('r');
-        log.writeLogRecord("Loaded rabbit file: " + rabbitFileName);
-    }
-    catch (int e) {
-        log.writeLogRecord("Missing required file: rabbit");
-        return 0;
-    }
+void hw4::main(int argc, char* argv[]) {
+	
 
-    // Load knight file
-    try {
-        knightFileName = arguments.at('k');
-        log.writeLogRecord("Loaded knight file: " + knightFileName);
-    }
-    catch (int e) {
-        log.writeLogRecord("Missing knight file, using default");
-    }
+	// Piping:  https://stackoverflow.com/questions/17508626/piping-for-input-output
+	// open pipes
+	int pipeToChild[2];
+	int pipeFromChild[2];
+	int bytesRead;
+
+	if (pipe(pipeToChild) != 0 || pipe(pipeFromChild) != 0) {
+		cout << "Failed to pipe" << endl;
+	}
 
 
-    // Create knights
-    if (knightFileName != "") {
-        kFileContents = FileProcessor().Process(knightFileName);
+	// Load log file
+	try {
+		logFileName = arguments.at('l');
+	}
+	catch (int e) {
+		logFileName = "log.txt";
+	}
 
-        ss << kFileContents[0];
-        getline(ss, trash, ':');
-        getline(ss, trash, ':');
-        count = stoi(trash);
-        ss.clear();
-
-        for (int i = 2; i / 6 < count; i += 6) {
-            ss << kFileContents[i];
-            getline(ss, trash, ':');
-            getline(ss, trash, ':');
-            values.push_back(trash);
-            ss.clear();
-
-            ss << kFileContents[(int)i + 1];
-            getline(ss, trash, ':');
-            getline(ss, trash, ':');
-            values.push_back(trash);
-            ss.clear();
-
-            ss << kFileContents[(int)i + 2];
-            getline(ss, trash, ':');
-            getline(ss, trash, ':');
-            values.push_back(trash);
-            ss.clear();
-
-            ss << kFileContents[(int)i + 3];
-            getline(ss, trash, ':');
-            getline(ss, trash, ':');
-            values.push_back(trash);
-            ss.clear();
-
-            ss << kFileContents[(int)i + 4];
-            getline(ss, trash, ':');
-            getline(ss, trash, ':');
-            values.push_back(trash);
-            ss.clear();
-
-            knight = Knight(values);
-            knights.push_back(knight);
-            values.clear();
-        }
-
-    }
-    else {
-        knight = Knight();
-        knights.push_back(knight);
-    }
+	int childLog = fork();
+	if (childLog == -1) {
+		cout << "An error has occured" << endl;
+		return 0;
+	}
+	if (childLog == 0) {
+		logStatus = main().makeLog();
+	}
 
 
-    // Create rabbit
-    rFileContents = FileProcessor().Process(rabbitFileName);
-    values.clear();
-    for (string x : rFileContents) {
-        ss << x;
-        getline(ss, trash, ':');
-        getline(ss, trash, ':');
-        values.push_back(trash);
-        ss.clear();
-    }
-
-    rabbit = Rabbit(values);
+	while (wait(&logStatus) > 0);
 
 
-    #pragma openmp parallel
-    {
-        #pragma openmp atomic{
-        foreach(Knight k in knights) {
-            int childKnight = fork();
-            int knightStatus = 0;
-            if (childKnight == -1) {
-                cout << "An error has occured" << endl;
-                return 0;
-            }
-            if (childKnight == 0) {
-                // create Knight proccess
-                knightStatus = hw4().KnightProc();
-            }
-        }
-        }
+	// Load rabbit file
 
-        int childRabbit = fork();
-        int rabbitStatus = 0;
-        if (childRabbit == -1) {
-            cout << "An error has occured" << endl;
-            return 0;
-        }
-        if (childRabbit == 0) {
-            // create Rabbit proccess
-            rabbitStatus = hw4().RabbitProc();
-        }
-    }
-   
-    while(wait(&logStatus) > 0);
-    while(wait(&knightStatus) > 0);
-    while(wait(&rabbitStatus) > 0);
+	try {
+		rabbitFileName = arguments.at('r');
+		log.writeLogRecord("Loaded rabbit file: " + rabbitFileName);
+	}
+	catch (int e) {
+		log.writeLogRecord("Missing required file: rabbit");
+		return 0;
+	}
 
-    hw4().PlayGame();
-    
+	// Load knight file
+	try {
+		knightFileName = arguments.at('k');
+		log.writeLogRecord("Loaded knight file: " + knightFileName);
+	}
+	catch (int e) {
+		log.writeLogRecord("Missing knight file, using default");
+	}
 
-    cout << "I am done..." << endl;
-    return 0;
+
+	// Read file contents
+	
+
+#pragma openmp parallel{
+	// Create knights
+
+	if (knightFileName != "") {
+		kFileContents = FileProcessor().Process(knightFileName);
+
+		ss << kFileContents[0];
+		getline(ss, trash, ':');
+		getline(ss, trash, ':');
+		count = stoi(trash);
+		ss.clear();
+
+		// fork for each knight
+		for (int i = 2; i / 6 < count; i += 6) {
+			int childKnight = fork();
+			if (childKnight == -1) {
+				cout << "An error has occured" << endl;
+				return 0;
+			}
+			if (childKnight == 0) {
+				knightStatus = main().makeKnight(i);
+			}
+		}
+
+	}
+	else {
+		int childKnight = fork();
+		if (childKnight == -1) {
+			cout << "An error has occured" << endl;
+			return 0;
+		}
+		if (childKnight == 0) {
+			knightStatus = main().makeKnight();
+		}
+	}
+
+
+	// Create rabbit
+	rFileContents = FileProcessor().Process(rabbitFileName);
+	values.clear();
+	for (string x : rFileContents) {
+		ss << x;
+		getline(ss, trash, ':');
+		getline(ss, trash, ':');
+		values.push_back(trash);
+		ss.clear();
+	}
+
+	int childRabbit = fork();
+	if (childRabbit == -1) {
+		cout << "An error has occured" << endl;
+		return 0;
+	}
+	if (childRabbit == 0) {
+		rabbitStatus = main().makeRabbit();
+	}
+
+
+	}// end pragma openmp parallel
+
+	
+	// wait for knights and rabbit creation
+	while (wait(&knightStatus) > 0);
+	while (wait(&rabbitStatus) > 0);
+
+
+	// Parent --> child
+	// main --> Log --> KnightA --> KnightB --> ... --> Rabbit 
+
+
+
+	// begin simulation
+	return main().playGame();
+	
+
+	return 0;
+} // end main
+
+
+int hw4::makeLog() {
+	// child process for log
+	Log log = Log(logFileName);
+	log.writeLogRecord("Loaded log file: " + logFileName);
+	exit(0);
 }
 
-int hw4::LogProc(){
-    // Open log file
-    cout << "I am Log" << endl;
-    exit(0);
+int hw4::makeKnight() {
+	// child process for default knight
+	knight = Knight();
+	knights.push_back(knight);
+	exit(0);
 }
 
-int hw4::KnightProc(){
-    // Create a Knight 
+int hw4::makeKnight(int i) {
+	// child process for knight
+	ss << kFileContents[i];
+	getline(ss, trash, ':');
+	getline(ss, trash, ':');
+	values.push_back(trash);
+	ss.clear();
 
-    // Open pipe to rabbit and log
-    cout << "I am Knight" << endl;
-    exit(0);
+	ss << kFileContents[(int)i + 1];
+	getline(ss, trash, ':');
+	getline(ss, trash, ':');
+	values.push_back(trash);
+	ss.clear();
+
+	ss << kFileContents[(int)i + 2];
+	getline(ss, trash, ':');
+	getline(ss, trash, ':');
+	values.push_back(trash);
+	ss.clear();
+
+	ss << kFileContents[(int)i + 3];
+	getline(ss, trash, ':');
+	getline(ss, trash, ':');
+	values.push_back(trash);
+	ss.clear();
+
+	ss << kFileContents[(int)i + 4];
+	getline(ss, trash, ':');
+	getline(ss, trash, ':');
+	values.push_back(trash);
+	ss.clear();
+
+	knight = Knight(values);
+	knights.push_back(knight);
+	values.clear();
+
+	exit(0);
 }
 
-int hw4::RabbitProc(){
-    // Create a rabbit
-
-    // Open pipe to knights and log
-    cout << "I am Rabbit" << endl;
-    exit(0);
+int hw4::makeRabbit() {
+	// child process for rabbit
+	rabbit = Rabbit(values);
+	exit(0);
 }
 
-int hw4::PlayGame(){
-    // Play game until there is a victor
+int hw4::playGame() {
+	// cycle through knights and rabbit (each checks for damage then attacks)
+	//bool victor = false;
 
-    cout << "Play the game!" << endl;
-    exit(0);
+	// while the game is still playing
+	//while (!victor) {
+
+	//}
+
+
+	return 0;
 }
