@@ -163,7 +163,7 @@ int hw4::main(int argc, char* argv[]) {
 
 int hw4::makeLog() {
 	// child process for log
-	Log log = Log(logFileName);
+	log = Log(logFileName);
 	log.writeLogRecord("Loaded log file: " + logFileName);
 	exit(0);
 }

@@ -30,6 +30,7 @@ private:
 	vector<string> values;
 	int count;
 
+	Log log;
 
 	Rabbit rabbit;
 
