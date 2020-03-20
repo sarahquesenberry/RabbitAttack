@@ -82,65 +82,65 @@ int hw4::main(int argc, char* argv[]) {
 	// Read file contents
 	
 
-#pragma openmp parallel{
-	// Create knights
+#pragma omp parallel
+	{
+		// Create knights
 
-	if (knightFileName != "") {
-		kFileContents = FileProcessor().Process(knightFileName);
+		if (knightFileName != "") {
+			kFileContents = FileProcessor().Process(knightFileName);
 
-		ss << kFileContents[0];
-		getline(ss, trash, ':');
-		getline(ss, trash, ':');
-		count = stoi(trash);
-		ss.clear();
+			ss << kFileContents[0];
+			getline(ss, trash, ':');
+			getline(ss, trash, ':');
+			count = stoi(trash);
+			ss.clear();
 
-		// fork for each knight
-		for (int i = 2; i / 6 < count; i += 6) {
+			// fork for each knight
+			for (int i = 2; i / 6 < count; i += 6) {
+				int childKnight = fork();
+				if (childKnight == -1) {
+					cout << "An error has occured" << endl;
+					return 0;
+				}
+				if (childKnight == 0) {
+					knightStatus = hw4().makeKnight(i);
+				}
+			}
+
+		}
+		else {
 			int childKnight = fork();
 			if (childKnight == -1) {
 				cout << "An error has occured" << endl;
 				return 0;
 			}
 			if (childKnight == 0) {
-				knightStatus = hw4().makeKnight(i);
+				knightStatus = hw4().makeKnight();
 			}
 		}
 
-	}
-	else {
-		int childKnight = fork();
-		if (childKnight == -1) {
+
+		// Create rabbit
+		rFileContents = FileProcessor().Process(rabbitFileName);
+		values.clear();
+		for (string x : rFileContents) {
+			ss << x;
+			getline(ss, trash, ':');
+			getline(ss, trash, ':');
+			values.push_back(trash);
+			ss.clear();
+		}
+
+		int childRabbit = fork();
+		if (childRabbit == -1) {
 			cout << "An error has occured" << endl;
 			return 0;
 		}
-		if (childKnight == 0) {
-			knightStatus = hw4().makeKnight();
+		if (childRabbit == 0) {
+			rabbitStatus = hw4().makeRabbit();
 		}
+
 	}
-
-
-	// Create rabbit
-	rFileContents = FileProcessor().Process(rabbitFileName);
-	values.clear();
-	for (string x : rFileContents) {
-		ss << x;
-		getline(ss, trash, ':');
-		getline(ss, trash, ':');
-		values.push_back(trash);
-		ss.clear();
-	}
-
-	int childRabbit = fork();
-	if (childRabbit == -1) {
-		cout << "An error has occured" << endl;
-		return 0;
-	}
-	if (childRabbit == 0) {
-		rabbitStatus = hw4().makeRabbit();
-	}
-
-
-	}// end pragma openmp parallel
 
 	
 	// wait for knights and rabbit creation
@@ -154,7 +154,7 @@ int hw4::main(int argc, char* argv[]) {
 
 
 	// begin simulation
-	return hw4().playGame();
+	//return hw4().playGame();
 	
 
 	return 0;
