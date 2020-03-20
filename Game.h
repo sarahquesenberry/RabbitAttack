@@ -1,6 +1,6 @@
 #pragma once
-#ifndef GAME_H
-#define GAME_H
+#ifndef GAME
+#define GAME
 #include "Log.h"
 #include "Rabbit.h"
 #include "Knight.h"

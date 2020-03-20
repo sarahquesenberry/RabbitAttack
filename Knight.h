@@ -1,6 +1,6 @@
 #pragma once
-#ifndef KNIGHT_H
-#define KNIGHT_H
+#ifndef KNIGHT
+#define KNIGHT
 
 #include <vector>
 #include <string>

@@ -1,3 +1,6 @@
+#ifndef FILEPROCESSOR
+#define FILEPROCESSOR
+
 #include <string>
 #include <fstream>
 #include <vector>
@@ -17,3 +20,5 @@ public:
 		return fileStream;
 	}
 };
+
+#endif

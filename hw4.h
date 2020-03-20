@@ -1,5 +1,5 @@
-#ifndef MAIN
-#define MAIN
+#ifndef HW4
+#define HW4
 
 #include <iostream>
 #include "Log.h"

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef RABBIT_H
-#define RABBIT_H
+#ifndef RABBIT
+#define RABBIT
 
 #include <vector>
 #include <string>

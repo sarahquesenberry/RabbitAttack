@@ -1,3 +1,7 @@
+#ifndef CMDPROCESSOR
+#define CMDPROCESSOR
+
+
 #include <map>
 #include <string>
 using namespace std;
@@ -16,3 +20,5 @@ public:
 		return argMap;
 	}
 };
+
+#endif
