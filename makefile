@@ -4,7 +4,7 @@
 
 
 hw4: hw4.o game.o main.o Log.o Knight.o Rabbit.o CMDProcessor.o FileProcessor.o
-	g++ hw4.o main.o Log.o Knight.o Rabbit.o CMDProcessor.o FileProcessor.o -o hw4
+	g++ hw4.o game.o main.o Log.o Knight.o Rabbit.o CMDProcessor.o FileProcessor.o -o hw4
 game.o: Game.cpp Game.h
 	g++ -c Game.cpp
 main.o: main.cpp
