@@ -1,4 +1,16 @@
 #include "main.h"
+#include <iostream>
+#include "Log.h"
+#include "Rabbit.h"
+#include "Knight.h"
+#include "Game.h"
+#include <string>
+#include "CMDProcessor.cpp"
+#include "FileProcessor.cpp"
+#include <map>
+#include <iterator>
+#include <vector>
+#include <sstream>
 
 using namespace std;
 
