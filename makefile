@@ -3,9 +3,9 @@
 # 3/11/2020
 
 
-hw4: main.o Log.o Knight.o Rabbit.o CMDProcessor.o FileProcessor.o
-	g++ main.o Log.o Knight.o Rabbit.o CMDProcessor.o FileProcessor.o -o hw4
-main.o: main.cpp main.h
+hw4: hw4.o Log.o Knight.o Rabbit.o CMDProcessor.o FileProcessor.o
+	g++ hw4.o Log.o Knight.o Rabbit.o CMDProcessor.o FileProcessor.o -o hw4
+hw4.o: hw4.cpp hw4.h
 	g++ -c main.cpp
 Log.o: Log.cpp Log.h
 	g++ -c Log.cpp
