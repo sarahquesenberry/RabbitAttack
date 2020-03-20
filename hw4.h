@@ -1,3 +1,4 @@
+#pragme once
 #ifndef HW4
 #define HW4
 
@@ -15,7 +16,7 @@
 #include <sstream>
 
 class hw4 {
-public:
+private:
 	map<char, string> arguments;
 	string logFileName = "";
 	string rabbitFileName = "";
