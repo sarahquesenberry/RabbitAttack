@@ -1,4 +1,5 @@
 #include "hw4.h"
+#include <unistd.h>
 #include <iostream>
 #include "Log.h"
 #include "Rabbit.h"
@@ -11,6 +12,7 @@
 #include <iterator>
 #include <vector>
 #include <sstream>
+
 
 using namespace std;
 
