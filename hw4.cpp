@@ -21,7 +21,8 @@ using namespace std;
 
 
 int hw4::main(int argc, char* argv[]) {
-	
+#pragma omp parallel
+	{
 
 	// Piping:  https://stackoverflow.com/questions/17508626/piping-for-input-output
 	// open pipes
@@ -82,8 +83,7 @@ int hw4::main(int argc, char* argv[]) {
 	// Read file contents
 	
 
-#pragma omp parallel
-	{
+
 		// Create knights
 
 		if (knightFileName != "") {
@@ -140,7 +140,7 @@ int hw4::main(int argc, char* argv[]) {
 			rabbitStatus = hw4().makeRabbit();
 		}
 
-	}
+	}// end pragma omp parallel
 
 	
 	// wait for knights and rabbit creation
@@ -211,6 +211,8 @@ int hw4::makeKnight(int i) {
 	knights.push_back(knight);
 	values.clear();
 
+
+
 	exit(0);
 }
 
@@ -222,12 +224,29 @@ int hw4::makeRabbit() {
 
 int hw4::playGame() {
 	// cycle through knights and rabbit (each checks for damage then attacks)
-	//bool victor = false;
+	bool victor = false;
+	int attackChance = 0;
+	int target;
+	int damage;
+
+	// Display players
+	log.writeLogRecord("Knights:");
+
+	for (Knight k : knights)
+	{
+		log.writeLogRecord(k.getName());
+	}
+
+	// Display opening message
+	log.writeLogRecord("Let the game begin!");
 
 	// while the game is still playing
-	//while (!victor) {
+	while (!victor) {
+		
+		victor = true;
 
-	//}
+
+	}
 	cout << "Game is played" << endl;
 
 	return 0;
