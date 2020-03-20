@@ -1,4 +1,4 @@
-#pragme once
+#pragma once
 #ifndef HW4
 #define HW4
 
