@@ -105,9 +105,6 @@ int hw4::main(int argc, char* argv[]) {
 						knightStatus = hw4().makeKnight(i);
 						exit(0);
 					}
-					else {
-						continue;
-					}
 				}
 
 			}
@@ -120,9 +117,6 @@ int hw4::main(int argc, char* argv[]) {
 				else if (childKnight == 0) {
 					knightStatus = hw4().makeKnight();
 					exit(0);
-				}
-				else {
-					continue;
 				}
 			}
 
