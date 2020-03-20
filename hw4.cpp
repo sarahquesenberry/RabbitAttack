@@ -30,6 +30,9 @@ int main(int argc, char* argv[]) {
 	}
 
 
+	arguments = CMDProcessor().Process(argc, argv);
+
+
 	// Load log file
 	try {
 		logFileName = arguments.at('l');

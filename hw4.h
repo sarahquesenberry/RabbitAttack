@@ -16,7 +16,7 @@
 
 class main {
 public:
-	map<char, string> arguments = CMDProcessor().Process(argc, argv);
+	map<char, string> arguments;
 	string logFileName = "";
 	string rabbitFileName = "";
 	string knightFileName = "";
