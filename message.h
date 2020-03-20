@@ -2,7 +2,7 @@
 #ifndef MESSAGE
 #define MESSAGE
 
-enum message{
+struct message{
     int from;
     int type;
     int damage;

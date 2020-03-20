@@ -45,6 +45,12 @@ private:
 	int pipeFromChild[2];
 	int bytesRead;
 
+	struct message {
+		int from;
+		int type;
+		int damage;
+	};
+
 public:
 	int main(int argc, char* argv[]);
 
