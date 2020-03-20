@@ -40,7 +40,7 @@ public:
 	int rabbitStatus = 0;
 
 public:
-	int main(int argc, char* argv[]);
+	//int main(int argc, char* argv[]);
 
 	int makeLog();
 	int makeKnight();

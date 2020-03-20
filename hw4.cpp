@@ -16,7 +16,7 @@ using namespace std;
 
 
 
-int hw4::main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) {
 	
 
 	// Piping:  https://stackoverflow.com/questions/17508626/piping-for-input-output
