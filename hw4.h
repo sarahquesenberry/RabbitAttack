@@ -14,7 +14,7 @@
 #include <vector>
 #include <sstream>
 
-class main {
+class hw4 {
 public:
 	map<char, string> arguments;
 	string logFileName = "";
