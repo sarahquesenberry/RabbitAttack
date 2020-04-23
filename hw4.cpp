@@ -254,16 +254,22 @@ int hw4::playGame() {
 
 
 	// Display players
-	log.writeLogRecord("Knights:");
+	string message;
+	
+	message = "Knights: ";
 
 	for (Knight k : knights)
 	{
-		log.writeLogRecord(k.getName());
+		//log.writeLogRecord(k.getName());
+		message += \n + k.GetName();
+		write(loggerPipe[1], message.c_str(), sizeof(message.c_str()));
 	}
 
 	// Display opening message
-	log.writeLogRecord("Let the game begin!");
+	message = "Let the game begin! ";
+	write(loggerPipe[1], message.c_str(), sizeof(message.c_str()));
 
+	/*
 	// while the game is still playing
 	while (!victor) {
 		target = rand() % knights.size() + 0;
@@ -332,6 +338,12 @@ int hw4::playGame() {
 
 
 	}
+	*/
+	message = "The game is over";
+	write(loggerPipe[1], message.c_str(), sizeof(message.c_str()));
+
+
+
 	cout << "Game has been played" << endl;
 
 	return 0;
