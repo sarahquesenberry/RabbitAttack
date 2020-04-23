@@ -261,7 +261,7 @@ int hw4::playGame() {
 	for (Knight k : knights)
 	{
 		//log.writeLogRecord(k.getName());
-		message += "\n" + k.GetName();
+		message += "\n" + k.getName();
 		write(loggerPipe[1], message.c_str(), sizeof(message.c_str()));
 	}
 
