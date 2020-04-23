@@ -239,8 +239,8 @@ int hw4::playGame() {
 	int attackChance = 0;
 	int target;
 	int damage;
-	
-	
+
+
 	message m;
 	// from:
 	//	rabbit = 0
@@ -255,13 +255,13 @@ int hw4::playGame() {
 
 	// Display players
 	string message;
-	
+
 	message = "Knights: ";
 
 	for (Knight k : knights)
 	{
 		//log.writeLogRecord(k.getName());
-		message += \n + k.GetName();
+		message += "\n" + k.GetName();
 		write(loggerPipe[1], message.c_str(), sizeof(message.c_str()));
 	}
 
@@ -347,3 +347,4 @@ int hw4::playGame() {
 	cout << "Game has been played" << endl;
 
 	return 0;
+}
