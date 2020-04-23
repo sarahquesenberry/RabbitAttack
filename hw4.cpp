@@ -66,7 +66,7 @@ int hw4::main(int argc, char* argv[]) {
 		wait(&status);
 		return -1;
 	}
-/*
+
 	// Load knight file - modified by Harrison 4/10/20
 	try {
 		knightFileName = arguments.at('k');
@@ -148,11 +148,11 @@ int hw4::main(int argc, char* argv[]) {
 
 
 		// begin simulation
-		return hw4().playGame();
+		hw4().playGame();
 	}
 
 	// wait on logger to die
-*/
+
 	// last open write end to the log -- closing it will cause read to return 0 (Harrison, 4/11/20)
 	close(loggerPipe[1]);
 
@@ -180,7 +180,7 @@ int hw4::logger() {
 	log.close();
 	exit(0);
 }
-/*
+
 int hw4::makeKnight() {
 	// child process for default knight
 	knight = Knight();
@@ -335,4 +335,3 @@ int hw4::playGame() {
 	cout << "Game has been played" << endl;
 
 	return 0;
-}*/
