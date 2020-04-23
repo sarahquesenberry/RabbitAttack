@@ -41,9 +41,12 @@ private:
 	int knightStatus = 0;
 	int rabbitStatus = 0;
 
-	int pipeToChild[2];
-	int pipeFromChild[2];
+	// modified by Harrison 4/10/20
+	int loggerPipe[2], rabbitPipe[2];
+	int *knightPipes;
 	int bytesRead;
+
+	static const int LOG_MESSAGE_LENGTH = 64;
 
 	struct message {
 		int from;
@@ -54,7 +57,7 @@ private:
 public:
 	int main(int argc, char* argv[]);
 
-	int makeLog();
+	int logger();
 	int makeKnight();
 	int makeKnight(int i);
 	int makeRabbit();
