@@ -77,7 +77,7 @@ int hw4::main(int argc, char* argv[]) {
 		char error[] = "Missing knight file, using default";
 		write(loggerPipe[1], error, sizeof(error));
 	}
-
+/*
 	// modified by Harrison 4/10/20
 	if (!knightFileName.empty()) {
 		kFileContents = FileProcessor().Process(knightFileName);
@@ -148,9 +148,9 @@ int hw4::main(int argc, char* argv[]) {
 
 
 		// begin simulation
-		//hw4().playGame();
+		hw4().playGame();
 	}
-
+*/
 	// wait on logger to die
 
 	// last open write end to the log -- closing it will cause read to return 0 (Harrison, 4/11/20)

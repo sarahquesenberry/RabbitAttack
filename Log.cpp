@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <time.h>
-#include <signal.h>
+#include "message.h"
 
 using namespace std;
 
@@ -17,7 +17,9 @@ fstream logfile;
 // Constructors
 // Default
 Log::Log() {
-	setLogfilename("log.txt");
+	setLogfilename("Log.txt");
+	open();
+	return;
 }
 
 // Overload: Character pointer
@@ -30,17 +32,22 @@ Log::Log(char* name) {
 	}
 
 	setLogfilename(temp);
+	open();
+	return;
 }
 
 // Overload: String
 Log::Log(std::string name) {
 	setLogfilename(name);
+	open();
+	return;
 }
 
 
 // Setter: Logfilename
 void Log::setLogfilename(string name) {
 	logfilename = name;
+	return;
 }
 
 
@@ -54,19 +61,17 @@ string Log::getLogfilename() {
 int Log::open() {
 
 	logfile.open(logfilename, ios_base::app);
-
-	if (logfile.bad())
-		return FAILURE;
-
-	logfile << getTimeStamp() << "Begin\n" << endl;
+	logfile << "Begin" << endl;
+	logfile << getTimeStamp() << endl;
 
 	return SUCCESS;
 }
 
 // Close log with timestamp
 int Log::close() {
+	logfile << "End" << endl;
+	logfile << getTimeStamp() << endl;
 
-	logfile << getTimeStamp() << "End" << endl;
 	logfile.close();
 
 	return SUCCESS;

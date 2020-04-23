@@ -1,6 +1,7 @@
 #include "Rabbit.h"
 #include <string>
 #include <vector>
+#include "message.h"
 
 using namespace std;
 
