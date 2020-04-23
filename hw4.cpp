@@ -148,7 +148,7 @@ int hw4::main(int argc, char* argv[]) {
 
 
 		// begin simulation
-		hw4().playGame();
+		//hw4().playGame();
 	}
 
 	// wait on logger to die
