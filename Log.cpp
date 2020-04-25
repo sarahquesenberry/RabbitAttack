@@ -18,7 +18,6 @@ fstream logfile;
 // Default
 Log::Log() {
 	setLogfilename("Log.txt");
-	open();
 	return;
 }
 
@@ -32,14 +31,12 @@ Log::Log(char* name) {
 	}
 
 	setLogfilename(temp);
-	open();
 	return;
 }
 
 // Overload: String
 Log::Log(std::string name) {
 	setLogfilename(name);
-	open();
 	return;
 }
 
@@ -61,17 +58,18 @@ string Log::getLogfilename() {
 int Log::open() {
 
 	logfile.open(logfilename, ios_base::app);
-	logfile << "Begin" << endl;
-	logfile << getTimeStamp() << endl;
+
+	if (logfile.bad())
+		return FAILURE;
+
+	logfile << getTimeStamp() << "Begin\n" << endl;
 
 	return SUCCESS;
 }
 
 // Close log with timestamp
 int Log::close() {
-	logfile << "End" << endl;
-	logfile << getTimeStamp() << endl;
-
+	logfile << getTimeStamp() << "End" << endl;
 	logfile.close();
 
 	return SUCCESS;

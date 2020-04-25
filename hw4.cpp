@@ -23,8 +23,9 @@ int hw4::main(int argc, char* argv[]) {
 	// Piping:  https://stackoverflow.com/questions/17508626/piping-for-input-output
 	// open logger pipe - modified by Harrison 4/10/20
 
-	if (pipe(loggerPipe)) {
+	if (pipe(loggerPipe) < 0) {
 		cout << "Failed to pipe" << endl;
+		exit(1);
 	}
 
 	arguments = CMDProcessor().Process(argc, argv);
@@ -52,7 +53,10 @@ int hw4::main(int argc, char* argv[]) {
 		exit(0);
 	}
 
+	close(loggerPipe[0]);
+
 	// Load rabbit file - modified by Harrison 4/10/20
+	cout << "Time to load rabbit file" << endl;
 	try {
 		rabbitFileName = arguments.at('r');
 		string message = "Loaded rabbit file: " + rabbitFileName;
@@ -68,14 +72,15 @@ int hw4::main(int argc, char* argv[]) {
 	}
 
 	// Load knight file - modified by Harrison 4/10/20
+	cout << "Time to load knight file" << endl;
 	try {
 		knightFileName = arguments.at('k');
 		string message = "Loaded knight file: " + knightFileName;
-		write(loggerPipe[1], message.c_str(), sizeof(message.c_str()));
+		write(loggerPipe[1], message.c_str(), message.length() + 1);
 	}
 	catch (const out_of_range& oor) {
-		char error[] = "Missing knight file, using default";
-		write(loggerPipe[1], error, sizeof(error));
+		string error = "Missing knight file, using default";
+		write(loggerPipe[1], error.c_str(), error.length() + 1);
 	}
 /*
 	// modified by Harrison 4/10/20
@@ -154,17 +159,20 @@ int hw4::main(int argc, char* argv[]) {
 	// wait on logger to die
 
 	// last open write end to the log -- closing it will cause read to return 0 (Harrison, 4/11/20)
+	cout << "Close log pipe (PARENT)" << endl; //DEBUG
 	close(loggerPipe[1]);
 
 	// wait for the logging process to complete and exit (Harrison, 4/11/20)
 	int status;
+	cout << "Wait for logging to complete and exit" << endl; //DEBUG
 	wait (&status);
-
+	cout << "End of program" << endl; //DEBUG
 	return 0;
 } // end main
 
 int hw4::logger() {
 	// child process for log
+	cout << "Child process open" << endl; //DEBUG
 	close(loggerPipe[1]);
 	log = Log(logFileName);
 	if(!log.open()) {
@@ -173,10 +181,12 @@ int hw4::logger() {
 	}
 
 	char message[LOG_MESSAGE_LENGTH];
-	while (read(loggerPipe[0], message, LOG_MESSAGE_LENGTH)) {
-		printf("Logger received: %s\n", message);
+	while (read(loggerPipe[0], message, LOG_MESSAGE_LENGTH) > 0) {
+		cout << "Logger received: " << message << endl;
 		log.writeLogRecord(string(message));
+		cout << "Log wrote record" << endl; //DEBUG
 	}
+	cout << "Log close" << endl; //DEBUG
 	log.close();
 	exit(0);
 }
@@ -348,3 +358,4 @@ int hw4::playGame() {
 
 	return 0;
 }
+
