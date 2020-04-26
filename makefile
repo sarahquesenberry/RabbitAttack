@@ -3,14 +3,14 @@
 # 3/11/2020
 
 
-hw4: hw4.o Game.o main.o Log.o Knight.o Rabbit.o CMDProcessor.o FileProcessor.o
-	g++ hw4.o Game.o main.o Log.o Knight.o Rabbit.o CMDProcessor.o FileProcessor.o -o hw4
+hw6: hw6.o Game.o main.o Log.o Knight.o Rabbit.o CMDProcessor.o FileProcessor.o
+	g++ hw6.o Game.o main.o Log.o Knight.o Rabbit.o CMDProcessor.o FileProcessor.o -o hw6
 Game.o: Game.cpp Game.h
 	g++ -c Game.cpp
 main.o: main.cpp
 	g++ -c main.cpp
-hw4.o: hw4.cpp hw4.h
-	g++ -c hw4.cpp
+hw6.o: hw6.cpp hw6.h
+	g++ -c hw6.cpp
 Log.o: Log.cpp Log.h
 	g++ -c Log.cpp
 Knight.o: Knight.cpp Knight.h
