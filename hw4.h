@@ -62,7 +62,6 @@ public:
 	int makeKnight(int i);
 	int makeRabbit();
 	int playGame();
-	string convertToString(char* a, int size);
 
 
 
