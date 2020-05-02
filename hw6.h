@@ -20,9 +20,9 @@
 class hw6{
 private:
     map<char, string> arguments;
-	string logFileName = "";
-	string rabbitFileName = "";
-	string knightFileName = "";
+	string logFileName;
+	string rabbitFileName;
+	string knightFileName;
 
 	vector<string> rFileContents;
 	vector<string> kFileContents;

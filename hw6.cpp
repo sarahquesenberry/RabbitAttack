@@ -47,37 +47,53 @@ int hw6::main(int argc, char* argv[]) {
         return 0;
     }
     else if(childLog == 0){
-        logStatus = logger();
+        cout << "Fork to LOG" << endl;
+        logStatus = hw6().logger();
         exit(0);
     }
 
 
-    // Create Game process
-    int childGame = fork();
-    if(childGame == -1){
-        cout << "An error has occured" << endl;
-        return 0;
-    }
-    else if(childGame == 0){
-        gameStatus = game();
-        exit(0);
-    }
+    //DEBUG
+    string num1 = "123";
+    
+    close(loggerPipe[0]); //close read end
+
+    write(loggerPipe[1], num1.c_str(), sizeof(num1) + 1);
+
+    close(loggerPipe[1]);
+    cout << "Game process successful" << endl;
+
+
+    /*
+    // create rabbitThread()
+    errno = pthread_create(&r, NULL, rabbitThread, NULL);
+    check_error(errno, 42);
+
+    // create knightThread()
+    errno = pthread_create(&k, NULL, knightThread, NULL);
+    check_error(errno, 42);
+
+    errno = pthread_join(r, NULL);
+    check_error(errno, 42);
+    errno = pthread_join(k, NULL);
+    check_error(errno, 42);
+
+    fflush(stdout);
+    return 0;
+    */
 
     
-
-
-    // Wait for both to exit
     cout << "Wait for log process" << endl;
-    wait(&logStatus);
-    cout << "Wait for game process" << endl;
-    wait(&gameStatus);
+    wait(NULL);
 
+    
+    cout << "End of file" << endl;
     return 0;
 }
 
 int hw6::logger(){
 
-    logFileName = "logfile.txt";
+    logFileName = "logFile.txt";
     close(loggerPipe[1]); //close write end
     log = Log(logFileName);
     if(!log.open()){
@@ -85,32 +101,22 @@ int hw6::logger(){
         kill(0, SIGTERM);
     }
 
-    char message[4];
-    while(read(loggerPipe[0], message, 4) > 0){
+    cout << "Logfile opened" << endl;
+    char message[LOG_MESSAGE_LENGTH];
+    /*
+    while(read(loggerPipe[0], message, LOG_MESSAGE_LENGTH) > 0){
         cout << "Logger received: " << message << endl;
         log.writeLogRecord(string(message));
     }
+    */
+    read(loggerPipe[0], message, sizeof(message));
+    cout << "Logger received: " << string(message) << endl;
 
     log.close();
     cout << "Log process successful" << endl;
     exit(0);
 }
 
-int hw6::game(){
-
-    string num1 = "123";
-    string num2 = "345";
-    string num3 = "456";
-    close(loggerPipe[0]); //close read end
-
-    write(loggerPipe[1], num1.c_str(), 4);
-    write(loggerPipe[1], num2.c_str(), 4);
-    write(loggerPipe[1], num3.c_str(), 4);
-
-    close(loggerPipe[1]);
-    cout << "Game process successful" << endl;
-    return 0;
-}
 
 hw6::message hw6::makeMessage(int from, int type, int damage){
     message m;
@@ -121,3 +127,20 @@ hw6::message hw6::makeMessage(int from, int type, int damage){
 
     return m;
 }
+
+
+
+// Thread RABBIT
+//void *rabbitThread(){
+//
+//    pthread_barrier_wait(&barrier);
+//    pthread_exit(0);
+//}
+
+
+
+// Thread KNIGHT
+//void *knightThread(){
+//    pthread_barrier_wait(&barrier);
+//    pthread_exit(0);
+//}
