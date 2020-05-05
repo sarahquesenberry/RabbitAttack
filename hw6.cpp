@@ -1,4 +1,4 @@
-#include "hw6.h"
+//#include "hw6.h"
 #include <pthread.h>
 #include <semaphore.h>
 #include <stdio.h>
@@ -24,15 +24,62 @@
 
 using namespace std;
 
+
+
+
+	
+
+class hw6{
 //shared data structures
 queue<message> messageQueue;
+map<char, string> arguments;
+
+// thread stuff from Harrison's einstein
+pthread_t r, k;
+pthread_barrier_t barrier;
+
+
+string logFileName;
+string rabbitFileName;
+string knightFileName;
+
+vector<string> rFileContents;
+vector<string> kFileContents;
+
+string trash;
+stringstream ss;
+vector<string> values;
+int count;
+
+Log log;
+
+Rabbit rabbit;
+
+Knight knight;
+vector<Knight> knights;
+message m;
+
+int logStatus;
+int gameStatus;
+
+int loggerPipe[2];
+int rabbitPipe[2];
+int *knightPipes;
+int bytesRead;
+
+static const int LOG_MESSAGE_LENGTH = 64;
 
 
 
-int hw6::main(int argc, char* argv[]) {
+
+
+
+int main(int argc, char* argv[]) {
 
     // Using queues: http://www.cplusplus.com/reference/queue/queue/
 
+
+    
     // open pipe
     if (pipe(loggerPipe) < 0) {
 		cout << "Failed to pipe" << endl;
@@ -54,34 +101,35 @@ int hw6::main(int argc, char* argv[]) {
 
 
     //DEBUG
-    string num1 = "123";
+    m = makeMessage(4,2,19);
     
     close(loggerPipe[0]); //close read end
 
-    write(loggerPipe[1], num1.c_str(), sizeof(num1) + 1);
+    write(loggerPipe[1], m.sendMessage(), m.contents.length() + 1);
 
-    close(loggerPipe[1]);
-    cout << "Game process successful" << endl;
+    
 
+    int errno;
 
-    /*
+    //pthread_barrier_init(&barrier, 0, 2);
+
     // create rabbitThread()
-    errno = pthread_create(&r, NULL, rabbitThread, NULL);
-    check_error(errno, 42);
+    pthread_create(&r, NULL, hw6::rabbitThread, NULL);
+    //hw6().check_error(errno, 42);
 
     // create knightThread()
-    errno = pthread_create(&k, NULL, knightThread, NULL);
-    check_error(errno, 42);
+    //errno = pthread_create(&k, NULL, hw6::knightThread, NULL);
+    //hw6().check_error(errno, 42);
 
     errno = pthread_join(r, NULL);
-    check_error(errno, 42);
-    errno = pthread_join(k, NULL);
-    check_error(errno, 42);
+    //hw6().check_error(errno, 42);
+    //errno = pthread_join(k, NULL);
+    //hw6().check_error(errno, 42);
 
-    fflush(stdout);
-    return 0;
-    */
+    //fflush(stdout);
 
+
+    close(loggerPipe[1]);
     
     cout << "Wait for log process" << endl;
     wait(NULL);
@@ -91,7 +139,9 @@ int hw6::main(int argc, char* argv[]) {
     return 0;
 }
 
-int hw6::logger(){
+
+
+int logger(){
 
     logFileName = "logFile.txt";
     close(loggerPipe[1]); //close write end
@@ -118,7 +168,7 @@ int hw6::logger(){
 }
 
 
-hw6::message hw6::makeMessage(int from, int type, int damage){
+message makeMessage(int from, int type, int damage){
     message m;
 
     m.from = from;
@@ -131,16 +181,29 @@ hw6::message hw6::makeMessage(int from, int type, int damage){
 
 
 // Thread RABBIT
-//void *rabbitThread(){
-//
-//    pthread_barrier_wait(&barrier);
-//    pthread_exit(0);
-//}
+void* rabbitThread(){
+    cout << "Rabbit Thread ran" << endl;
+    //pthread_barrier_wait(&barrier);
+
+    //fflush(stdout);
+    //pthread_exit(NULL);
+}
 
 
 
 // Thread KNIGHT
 //void *knightThread(){
-//    pthread_barrier_wait(&barrier);
-//    pthread_exit(0);
+//    cout << "Knight Thread ran" << endl;
+    //pthread_barrier_wait(&barrier);
+
+    //fflush(stdout);
+//    pthread_exit(NULL);
 //}
+
+void check_error(int errno, int status_code){
+		if(errno){
+			perror(strerror(errno));
+			exit(status_code);
+		}
+	}
+};
