@@ -27,9 +27,7 @@ using namespace std;
 
 
 
-	
 
-class hw6{
 //shared data structures
 queue<message> messageQueue;
 map<char, string> arguments;
@@ -69,75 +67,6 @@ int bytesRead;
 
 static const int LOG_MESSAGE_LENGTH = 64;
 
-
-
-
-
-
-int main(int argc, char* argv[]) {
-
-    // Using queues: http://www.cplusplus.com/reference/queue/queue/
-
-
-    
-    // open pipe
-    if (pipe(loggerPipe) < 0) {
-		cout << "Failed to pipe" << endl;
-		exit(1);
-	}
-
-
-    // Create Log process
-    int childLog = fork();
-    if(childLog == -1){
-        cout << "An error has occurred" << endl; 
-        return 0;
-    }
-    else if(childLog == 0){
-        cout << "Fork to LOG" << endl;
-        logStatus = hw6().logger();
-        exit(0);
-    }
-
-
-    //DEBUG
-    m = makeMessage(4,2,19);
-    
-    close(loggerPipe[0]); //close read end
-
-    write(loggerPipe[1], m.sendMessage(), m.contents.length() + 1);
-
-    
-
-    int errno;
-
-    //pthread_barrier_init(&barrier, 0, 2);
-
-    // create rabbitThread()
-    pthread_create(&r, NULL, hw6::rabbitThread, NULL);
-    //hw6().check_error(errno, 42);
-
-    // create knightThread()
-    //errno = pthread_create(&k, NULL, hw6::knightThread, NULL);
-    //hw6().check_error(errno, 42);
-
-    errno = pthread_join(r, NULL);
-    //hw6().check_error(errno, 42);
-    //errno = pthread_join(k, NULL);
-    //hw6().check_error(errno, 42);
-
-    //fflush(stdout);
-
-
-    close(loggerPipe[1]);
-    
-    cout << "Wait for log process" << endl;
-    wait(NULL);
-
-    
-    cout << "End of file" << endl;
-    return 0;
-}
 
 
 
@@ -181,7 +110,7 @@ message makeMessage(int from, int type, int damage){
 
 
 // Thread RABBIT
-void* rabbitThread(){
+void* rabbitThread(void*){
     cout << "Rabbit Thread ran" << endl;
     //pthread_barrier_wait(&barrier);
 
@@ -206,4 +135,73 @@ void check_error(int errno, int status_code){
 			exit(status_code);
 		}
 	}
-};
+
+
+
+
+
+
+int main(int argc, char* argv[]) {
+
+    // Using queues: http://www.cplusplus.com/reference/queue/queue/
+
+
+    
+    // open pipe
+    if (pipe(loggerPipe) < 0) {
+		cout << "Failed to pipe" << endl;
+		exit(1);
+	}
+
+
+    // Create Log process
+    int childLog = fork();
+    if(childLog == -1){
+        cout << "An error has occurred" << endl; 
+        return 0;
+    }
+    else if(childLog == 0){
+        cout << "Fork to LOG" << endl;
+        logStatus = logger();
+        exit(0);
+    }
+
+
+    //DEBUG
+    m = makeMessage(4,2,19);
+    
+    close(loggerPipe[0]); //close read end
+
+    write(loggerPipe[1], m.sendMessage(), m.contents.length() + 1);
+
+    
+
+    int errno;
+
+    //pthread_barrier_init(&barrier, 0, 2);
+
+    // create rabbitThread()
+    errno = pthread_create(&r, NULL, rabbitThread, NULL);
+    //hw6().check_error(errno, 42);
+
+    // create knightThread()
+    //errno = pthread_create(&k, NULL, hw6::knightThread, NULL);
+    //hw6().check_error(errno, 42);
+
+    errno = pthread_join(r, NULL);
+    //hw6().check_error(errno, 42);
+    //errno = pthread_join(k, NULL);
+    //hw6().check_error(errno, 42);
+
+    //fflush(stdout);
+
+
+    close(loggerPipe[1]);
+    
+    cout << "Wait for log process" << endl;
+    wait(NULL);
+
+    
+    cout << "End of file" << endl;
+    return 0;
+}
