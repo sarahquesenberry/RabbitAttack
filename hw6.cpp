@@ -29,12 +29,14 @@ using namespace std;
 
 
 //shared data structures
-queue<message> messageQueue;
+queue<string> messageQueue;
 map<char, string> arguments;
 
 // thread stuff from Harrison's einstein
 pthread_t r, k;
 pthread_barrier_t barrier;
+
+pthread_mutex_t lock;
 
 
 string logFileName;
@@ -82,15 +84,13 @@ int logger(){
 
     cout << "Logfile opened" << endl;
     char message[LOG_MESSAGE_LENGTH];
-    /*
-    while(read(loggerPipe[0], message, LOG_MESSAGE_LENGTH) > 0){
+    
+    while(read(loggerPipe[0], message, sizeof(message)) > 0){
         cout << "Logger received: " << message << endl;
         log.writeLogRecord(string(message));
     }
-    */
-    read(loggerPipe[0], message, sizeof(message));
-    cout << "Logger received: " << string(message) << endl;
 
+    cout << "Close log" << endl;
     log.close();
     cout << "Log process successful" << endl;
     exit(0);
@@ -111,23 +111,46 @@ message makeMessage(int from, int type, int damage){
 
 // Thread RABBIT
 void* rabbitThread(void*){
+    pthread_mutex_lock(&lock);
     cout << "Rabbit Thread ran" << endl;
+    pthread_mutex_unlock(&lock);
     //pthread_barrier_wait(&barrier);
 
-    //fflush(stdout);
-    //pthread_exit(NULL);
+    string messageR;
+
+    for(int i = 0; i < 6; i++){
+        messageR = "Rabbit attack " + to_string(i);
+        pthread_mutex_lock(&lock);
+        messageQueue.push(messageR);
+        pthread_mutex_unlock(&lock);
+        sleep(1);
+    }
+
+    pthread_exit(NULL);
 }
 
 
 
 // Thread KNIGHT
-//void *knightThread(){
-//    cout << "Knight Thread ran" << endl;
+void* knightThread(void*){
+    pthread_mutex_lock(&lock);
+    cout << "Knight Thread ran" << endl;
+    pthread_mutex_unlock(&lock);
     //pthread_barrier_wait(&barrier);
 
-    //fflush(stdout);
-//    pthread_exit(NULL);
-//}
+    string messageK;
+
+    for(int i = 0; i < 6; i++){
+        messageK = "Knight attack " + to_string(i);
+        pthread_mutex_lock(&lock);
+        messageQueue.push(messageK);
+        pthread_mutex_unlock(&lock);
+        sleep(1);
+    }
+
+
+    pthread_exit(NULL);
+}
 
 void check_error(int errno, int status_code){
 		if(errno){
@@ -142,9 +165,6 @@ void check_error(int errno, int status_code){
 
 
 int main(int argc, char* argv[]) {
-
-    // Using queues: http://www.cplusplus.com/reference/queue/queue/
-
 
     
     // open pipe
@@ -181,19 +201,32 @@ int main(int argc, char* argv[]) {
     //pthread_barrier_init(&barrier, 0, 2);
 
     // create rabbitThread()
+    cout << "Rabbit Thread creation" << endl;
     errno = pthread_create(&r, NULL, rabbitThread, NULL);
     //hw6().check_error(errno, 42);
 
     // create knightThread()
-    //errno = pthread_create(&k, NULL, hw6::knightThread, NULL);
+    cout << "Knight Thread creation" << endl;
+    errno = pthread_create(&k, NULL, knightThread, NULL);
     //hw6().check_error(errno, 42);
 
+    cout << "Join r" << endl;
     errno = pthread_join(r, NULL);
     //hw6().check_error(errno, 42);
-    //errno = pthread_join(k, NULL);
+    cout << "Join k" << endl;
+    errno = pthread_join(k, NULL);
     //hw6().check_error(errno, 42);
 
     //fflush(stdout);
+
+    cout << "Sleepy time..." << endl;
+    sleep(3);
+
+    cout << "PRINT" << endl;
+    while(!messageQueue.empty()){
+        cout << messageQueue.front() << endl;
+        messageQueue.pop();
+    }
 
 
     close(loggerPipe[1]);
