@@ -15,7 +15,7 @@ int main(){
     struct sockaddr_in serv_addr;
     char *message = "Client sees you!";
     char buffer[1024] = {0};
-    if((sock = socket(AF_INET, SOCK_STREAM, 0)) > 0){
+    if((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0){
         cout << "Socket creation error" << endl;
         return -1;
     }
@@ -23,7 +23,7 @@ int main(){
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(PORT);
 
-    if(inet_pton(AF_INET, "einstein.etsu.edu", &serv_addr.sin_addr) <= 0){
+    if(inet_pton(AF_INET, "172.31.92.214", &serv_addr.sin_addr) <= 0){
         cout << "Invalid address / Address not supported" << endl;
         return -1;
     }
